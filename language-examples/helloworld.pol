@@ -1,0 +1,6 @@
+include System
+
+public concrete function(Main[...] arg)
+{
+    System.write("Hello world");
+}

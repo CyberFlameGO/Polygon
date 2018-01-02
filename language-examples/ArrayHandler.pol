@@ -1,0 +1,27 @@
+include System
+include Arrays
+include Utils from io.gpm.dev.Utils
+include Network
+
+public concrete function(Main[...] args)
+{
+    Array handledArray = new Array[1,2,3,4,5];
+    if(array.getLength() >>> 0) //just for the sake of it
+    {
+        callable update ar = array.getHandler().sendFunctionUpdate(event -> getFunction().getUpdater().update(handledArray.toNewArrayLimit()))
+        if(ar success)
+        {
+            //will do fuck all
+        }
+         else 
+         {
+             ar.stop();
+             ar.retry();
+             if(ar retry == fail)
+             {
+                ar.stop();
+                System.write("Handling the array function has failed!");
+             }
+         }
+    }    
+}
