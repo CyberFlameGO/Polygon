@@ -1,0 +1,44 @@
+include System
+include Arrays
+include Utils from io.gpm.dev.Utils
+include Network
+include Databse
+
+public concrete function(Main[...] arg)
+{
+    @Handle~lazy
+    protected var Database = new DatabaseModule("host", "port", "admin", "password");
+
+    attempt 
+    {
+        Database.network.Connect().getDefaultVariables();
+        if(attempt == fail)
+        {
+            ~retry
+        }
+        else
+        {
+            ~abort
+        }
+    } pickup (new DatabaseNotFound("Could not connect to database"));
+}
+
+public handleable function getData(Database db, String value)
+{
+    for
+    {
+       var Db = Database.getCurrent();
+       attempt
+       {
+           database.get().stream(event >>> search for(value));
+           if(value.isFound())
+           {
+               //set it to do shit
+           }
+           else
+           {
+               ~abort
+           }
+       }
+    }
+}
